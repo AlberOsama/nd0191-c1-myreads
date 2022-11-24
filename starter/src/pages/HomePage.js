@@ -1,3 +1,5 @@
+import Book from "../components/Book";
+
 const HomePage = ({ onClick }) => {
   return (
     <div className="list-books">
@@ -11,6 +13,16 @@ const HomePage = ({ onClick }) => {
             <div className="bookshelf-books">
               <ol className="books-grid">
                 <li>
+                  <Book
+                    book={{
+                      title: "title",
+                      authors: ["author"],
+                      imageLinks: {
+                        smallThumbnail:
+                          "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                      },
+                    }}
+                  />
                   <div className="book">
                     <div className="book-top">
                       <div
