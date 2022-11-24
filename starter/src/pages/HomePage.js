@@ -1,4 +1,5 @@
 import Book from "../components/Book";
+import Shelf from "../components/Shelf";
 
 const HomePage = ({ onClick }) => {
   return (
@@ -8,6 +9,27 @@ const HomePage = ({ onClick }) => {
       </div>
       <div className="list-books-content">
         <div>
+          <Shelf
+            title={"shelf"}
+            books={[
+              {
+                title: "title",
+                authors: ["author"],
+                imageLinks: {
+                  smallThumbnail:
+                    "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                },
+              },
+              {
+                title: "title 2",
+                authors: ["author 2"],
+                imageLinks: {
+                  smallThumbnail:
+                    "http://books.google.com/books/content?id=nggnmAEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                },
+              },
+            ]}
+          />
           <div className="bookshelf">
             <h2 className="bookshelf-title">Currently Reading</h2>
             <div className="bookshelf-books">
