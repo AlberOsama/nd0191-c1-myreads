@@ -1,10 +1,10 @@
-import Book from "../components/Book";
 import Shelf from "../components/Shelf";
 import { useEffect, useState } from "react";
 import { getAll } from "../BooksAPI";
 
 const HomePage = ({ onClick }) => {
-  const [books, setBooks] = useState();
+  const [books, setBooks] = useState([]);
+
   useEffect(async () => {
     setBooks(await getAll());
   }, []);
