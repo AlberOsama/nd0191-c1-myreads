@@ -7,9 +7,18 @@ const SearchPage = () => {
   const [query, setQuery] = useState("");
 
   const [books, setBooks] = useState([]);
-  useEffect(async () => {
-    if (query === "") return;
-    setBooks(await search(query, 30));
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        if (query === "") return;
+        const results = await search(query, 30);
+        results && Array.isArray(results) ? setBooks(results) : setBooks([]);
+      } catch (err) {
+        console.log(err);
+        setBooks([]);
+      }
+    }
+    fetchData();
   }, [query]);
 
   return (
