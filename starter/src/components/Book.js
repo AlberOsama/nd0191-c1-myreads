@@ -16,7 +16,7 @@ const Book = ({ book, onBookChange }) => {
         ></div>
         <div className="book-shelf-changer">
           <select
-            value={book.shelf}
+            value={book.shelf ? book.shelf : "none"}
             onChange={async (e) => {
               const shelf = e.target.value;
 
@@ -26,7 +26,7 @@ const Book = ({ book, onBookChange }) => {
               }
             }}
           >
-            <option value="none" disabled>
+            <option value="x" disabled>
               Move to...
             </option>
             <option value="currentlyReading">Currently Reading</option>

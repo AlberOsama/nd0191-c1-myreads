@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { search } from "../BooksAPI";
+import { getAll, search } from "../BooksAPI";
 import Book from "../components/Book";
 
 const SearchPage = () => {
@@ -10,9 +10,26 @@ const SearchPage = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        if (query === "") return;
-        const results = await search(query, 30);
-        results && Array.isArray(results) ? setBooks(results) : setBooks([]);
+        if (query === "") {
+          setBooks([]);
+          return;
+        }
+        const searchResults = await search(query, 30);
+        const getResults = await getAll();
+        const newBooks = [];
+        if (searchResults && Array.isArray(searchResults)) {
+          for (let i in searchResults) {
+            const filteredBooks = getResults.filter(
+              (x) => x.id === searchResults[i].id
+            );
+            if (filteredBooks.length > 0) {
+              newBooks.push(filteredBooks[0]);
+            } else {
+              newBooks.push(searchResults[i]);
+            }
+          }
+        }
+        setBooks(newBooks);
       } catch (err) {
         console.log(err);
         setBooks([]);
@@ -39,7 +56,7 @@ const SearchPage = () => {
       <div className="search-books-results">
         <ol className="books-grid">
           {books.map((book) => (
-            <li key={book.title}>
+            <li key={book.id}>
               <Book book={book} />
             </li>
           ))}
