@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getAll } from "../BooksAPI";
 import { Link } from "react-router-dom";
 
-const HomePage = ({ onClick }) => {
+const HomePage = ({}) => {
   const [books, setBooks] = useState([]);
 
   useEffect(async () => {
@@ -32,7 +32,7 @@ const HomePage = ({ onClick }) => {
         </div>
       </div>
       <div className="open-search">
-        <Link to={"SearchPage"}></Link>
+        <Link to={"search"}></Link>
       </div>
     </div>
   );

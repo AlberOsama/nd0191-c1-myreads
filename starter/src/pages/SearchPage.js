@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { search } from "../BooksAPI";
 import Book from "../components/Book";
 
-const SearchPage = ({ onClick }) => {
+const SearchPage = () => {
   const [query, setQuery] = useState("");
 
   const [books, setBooks] = useState([]);
   useEffect(async () => {
     if (query === "") return;
-    setBooks(await search(query, 20));
+    setBooks(await search(query, 30));
   }, [query]);
 
   return (
