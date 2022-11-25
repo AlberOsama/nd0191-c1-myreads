@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { search } from "../BooksAPI";
 import Book from "../components/Book";
 
@@ -14,9 +15,10 @@ const SearchPage = ({ onClick }) => {
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <a className="close-search" onClick={onClick}>
-          Close
-        </a>
+        <Link className="close-search" to={"/"}>
+          close
+        </Link>
+
         <div className="search-books-input-wrapper">
           <input
             type="text"

@@ -3,17 +3,15 @@ import SearchPage from "./pages/SearchPage";
 
 import { useState } from "react";
 import HomePage from "./pages/HomePage";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
-
   return (
     <div className="app">
-      {showSearchPage ? (
-        <SearchPage onClick={() => setShowSearchpage(!showSearchPage)} />
-      ) : (
-        <HomePage onClick={() => setShowSearchpage(!showSearchPage)} />
-      )}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/SearchPage" element={<SearchPage />} />
+      </Routes>
     </div>
   );
 }

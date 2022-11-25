@@ -1,6 +1,7 @@
 import Shelf from "../components/Shelf";
 import { useEffect, useState } from "react";
 import { getAll } from "../BooksAPI";
+import { Link } from "react-router-dom";
 
 const HomePage = ({ onClick }) => {
   const [books, setBooks] = useState([]);
@@ -31,7 +32,7 @@ const HomePage = ({ onClick }) => {
         </div>
       </div>
       <div className="open-search">
-        <a onClick={onClick}>Add a book</a>
+        <Link to={"SearchPage"}></Link>
       </div>
     </div>
   );
