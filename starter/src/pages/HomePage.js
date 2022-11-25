@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 
 const HomePage = ({}) => {
   const [books, setBooks] = useState([]);
-
-  useEffect(async () => {
+  const fetchBooks = async () => {
     setBooks(await getAll());
+  };
+
+  useEffect(() => {
+    fetchBooks();
   }, []);
 
   return (
@@ -20,14 +23,17 @@ const HomePage = ({}) => {
           <Shelf
             title={"Currently Reading"}
             books={books.filter((book) => book.shelf === "currentlyReading")}
+            onShelfChange={fetchBooks}
           />
           <Shelf
             title={"Want to Read"}
             books={books.filter((book) => book.shelf === "wantToRead")}
+            onShelfChange={fetchBooks}
           />
           <Shelf
             title={"Read"}
             books={books.filter((book) => book.shelf === "read")}
+            onShelfChange={fetchBooks}
           />
         </div>
       </div>

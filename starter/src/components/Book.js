@@ -1,4 +1,6 @@
-const Book = ({ book }) => {
+import { update } from "../BooksAPI";
+
+const Book = ({ book, onBookChange }) => {
   return (
     <div className="book">
       <div className="book-top">
@@ -13,7 +15,17 @@ const Book = ({ book }) => {
           }}
         ></div>
         <div className="book-shelf-changer">
-          <select>
+          <select
+            value={book.shelf}
+            onChange={async (e) => {
+              const shelf = e.target.value;
+
+              await update(book, shelf);
+              if (onBookChange) {
+                onBookChange();
+              }
+            }}
+          >
             <option value="none" disabled>
               Move to...
             </option>
