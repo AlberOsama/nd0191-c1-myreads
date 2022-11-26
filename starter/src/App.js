@@ -4,7 +4,7 @@ import SearchPage from "./pages/SearchPage";
 import { getAll, update } from "./BooksAPI";
 
 import HomePage from "./pages/HomePage";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -32,6 +32,16 @@ function App() {
         <Route
           path="/search"
           element={<SearchPage booksOnShelf={books} moveBook={moveBook} />}
+        />
+        <Route
+          path="*"
+          element={
+            <div>
+              <div>not found</div>
+
+              <Link to={"/"}>back home</Link>
+            </div>
+          }
         />
       </Routes>
     </div>
