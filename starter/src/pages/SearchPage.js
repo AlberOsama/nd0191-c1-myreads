@@ -3,38 +3,40 @@ import { Link } from "react-router-dom";
 import { getAll, search } from "../BooksAPI";
 import Book from "../components/Book";
 
-const SearchPage = () => {
+const SearchPage = ({ booksOnShelf, moveBook }) => {
   const [query, setQuery] = useState("");
 
   const [books, setBooks] = useState([]);
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        if (query === "") {
-          setBooks([]);
-          return;
-        }
-        const searchResults = await search(query, 30);
-        const getResults = await getAll();
-        const newBooks = [];
-        if (searchResults && Array.isArray(searchResults)) {
-          for (let i in searchResults) {
-            const filteredBooks = getResults.filter(
-              (x) => x.id === searchResults[i].id
-            );
-            if (filteredBooks.length > 0) {
-              newBooks.push(filteredBooks[0]);
-            } else {
-              newBooks.push(searchResults[i]);
-            }
+
+  async function fetchData() {
+    try {
+      if (query === "") {
+        setBooks([]);
+        return;
+      }
+      const searchResults = await search(query, 30);
+
+      const newBooks = [];
+      if (searchResults && Array.isArray(searchResults)) {
+        for (let i in searchResults) {
+          const filteredBooks = booksOnShelf.filter(
+            (x) => x.id === searchResults[i].id
+          );
+          if (filteredBooks.length > 0) {
+            newBooks.push(filteredBooks[0]);
+          } else {
+            newBooks.push(searchResults[i]);
           }
         }
-        setBooks(newBooks);
-      } catch (err) {
-        console.log(err);
-        setBooks([]);
       }
+      setBooks(newBooks);
+    } catch (err) {
+      console.log(err);
+      setBooks([]);
     }
+  }
+
+  useEffect(() => {
     fetchData();
   }, [query]);
 
@@ -57,7 +59,7 @@ const SearchPage = () => {
         <ol className="books-grid">
           {books.map((book) => (
             <li key={book.id}>
-              <Book book={book} />
+              <Book book={book} moveBook={moveBook} />
             </li>
           ))}
         </ol>

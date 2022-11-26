@@ -1,6 +1,4 @@
-import { update } from "../BooksAPI";
-
-const Book = ({ book, onBookChange }) => {
+const Book = ({ book, moveBook }) => {
   return (
     <div className="book">
       <div className="book-top">
@@ -19,11 +17,7 @@ const Book = ({ book, onBookChange }) => {
             value={book.shelf ? book.shelf : "none"}
             onChange={async (e) => {
               const shelf = e.target.value;
-
-              await update(book, shelf);
-              if (onBookChange) {
-                onBookChange();
-              }
+              moveBook(book, shelf);
             }}
           >
             <option value="x" disabled>

@@ -1,18 +1,7 @@
 import Shelf from "../components/Shelf";
-import { useEffect, useState } from "react";
-import { getAll } from "../BooksAPI";
 import { Link } from "react-router-dom";
 
-const HomePage = ({}) => {
-  const [books, setBooks] = useState([]);
-  const fetchBooks = async () => {
-    setBooks(await getAll());
-  };
-
-  useEffect(() => {
-    fetchBooks();
-  }, []);
-
+const HomePage = ({ books, moveBook }) => {
   return (
     <div className="list-books">
       <div className="list-books-title">
@@ -23,17 +12,17 @@ const HomePage = ({}) => {
           <Shelf
             title={"Currently Reading"}
             books={books.filter((book) => book.shelf === "currentlyReading")}
-            onShelfChange={fetchBooks}
+            moveBook={moveBook}
           />
           <Shelf
             title={"Want to Read"}
             books={books.filter((book) => book.shelf === "wantToRead")}
-            onShelfChange={fetchBooks}
+            moveBook={moveBook}
           />
           <Shelf
             title={"Read"}
             books={books.filter((book) => book.shelf === "read")}
-            onShelfChange={fetchBooks}
+            moveBook={moveBook}
           />
         </div>
       </div>
